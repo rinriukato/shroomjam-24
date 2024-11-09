@@ -24,10 +24,7 @@ mesh = SubResource("CapsuleMesh_rnq2j")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79, 0)
 
-[node name="CameraSmooth" type="Node3D" parent="Head"]
-unique_name_in_owner = true
-
-[node name="Camera3D" type="Camera3D" parent="Head/CameraSmooth"]
+[node name="Camera3D" type="Camera3D" parent="Head"]
 unique_name_in_owner = true
 cull_mask = 1048573
 
