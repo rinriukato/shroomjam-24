@@ -60,6 +60,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(1.2, 1.2)
 script = ExtResource("4_u75la")
 player = NodePath("..")
 
@@ -73,6 +74,7 @@ layout_mode = 2
 text = "HP: 0"
 
 [node name="State" type="Label" parent="DebugUI/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Current State: Idle"
 

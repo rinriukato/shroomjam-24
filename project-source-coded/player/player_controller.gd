@@ -43,6 +43,7 @@ var wish_dir := Vector3.ZERO
 func _ready():
 	# Hide player model from camera
 	update_view_model_masks()
+	current_state = states.IDLE
 
 func update_view_model_masks():
 	for child in %WorldModel.find_children('*', 'VisualInstance3D'):
@@ -72,8 +73,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			# Clamp camera rotation to not go too far
 			%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 			
-func _process(_delta):
-	pass
+#func _process(_delta):
+#	pass
 
 var _saved_camera_global_pos = null
 func _save_camera_pos_for_smoothing():
@@ -91,12 +92,15 @@ func _slide_camera_smooth_back_to_origin(delta):
 		_saved_camera_global_pos = null # Stop smoothing camera
 
 func _handle_ground_physics(delta) -> void:
+	
 	var cur_speed_in_wish_dir = self.velocity.dot(wish_dir)
 	var add_speed_till_cap = walk_speed - cur_speed_in_wish_dir
 	if add_speed_till_cap > 0:
 		var accel_speed = ground_accel * delta * walk_speed
 		accel_speed = min(accel_speed, add_speed_till_cap)
 		self.velocity += accel_speed * wish_dir
+		if self.velocity.length() > 1.0:
+			current_state = states.RUN
 	
 	# Apply friction
 	var control = max(self.velocity.length(), ground_decel)
@@ -107,6 +111,7 @@ func _handle_ground_physics(delta) -> void:
 	self.velocity *= new_speed
 
 func _handle_air_physics(delta) -> void:
+	current_state = states.INAIR
 	
 	if self.velocity.y >= 0.0:
 		self.velocity.y += jump_gravity * delta
@@ -123,6 +128,7 @@ func _handle_air_physics(delta) -> void:
 		var accel_speed = air_accel * air_move_speed * delta
 		accel_speed = min(accel_speed, add_speed_till_cap) 
 		self.velocity += accel_speed * wish_dir
+	
 
 # Handle jump, potential double jump functionality here...
 func _handle_jump():
@@ -189,6 +195,13 @@ func _snap_down_to_stairs_check() -> void:
 	_snapped_to_stairs_last_frame = did_snap
 
 func _physics_process(delta: float):
+	
+	# If not moving, set to idle
+	if current_state != states.IDLE:
+		if self.velocity.length() < 1.0:
+			current_state = states.IDLE
+
+	
 	if is_on_floor():
 		_last_frame_was_on_floor = Engine.get_physics_frames()
 	
@@ -198,6 +211,7 @@ func _physics_process(delta: float):
 	if Input.is_action_just_pressed("dash"):
 		self.velocity.x = wish_dir.x * dash_power
 		self.velocity.z = wish_dir.z * dash_power
+		current_state = states.DASHING
 	
 	if is_on_floor() or _snapped_to_stairs_last_frame:
 		# NOTE: using 'is_action_pressed' here allows for auto 'bhopping'. 
