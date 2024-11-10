@@ -64,6 +64,7 @@ timeBeforeCanSlideAgain = 0.5
 wallJumpVelocity = 3.0
 dashTime = 0.09
 timeBeforeCanDashAgain = 2.0
+dashCooldown = 1.0
 wallGravityMultiplier = 0.7
 
 [node name="standingHitbox" type="CollisionShape3D" parent="."]
@@ -223,6 +224,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Number jumps allowed in air : "
 
+[node name="DashesLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Dashes avaliable : "
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="HUD/HBoxContainer"]
 layout_mode = 2
 
@@ -261,3 +268,14 @@ texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "..................."
+
+[node name="DashesLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "..................."
+
+[node name="DashTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

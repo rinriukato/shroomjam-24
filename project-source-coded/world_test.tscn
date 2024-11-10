@@ -88,3 +88,6 @@ outline_size = 47
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("5_mjmwr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.55231, 0)
+walkSpeed = 20.0
+runSpeed = 30.0
+maxDashes = 3

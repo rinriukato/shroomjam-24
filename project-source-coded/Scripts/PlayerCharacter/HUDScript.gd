@@ -11,6 +11,7 @@ class_name HUD
 @onready var framesPerSecondLabelText = $HBoxContainer/VBoxContainer2/FramesPerSecondLabelText
 @onready var nbJumpsAllowedInAirLabelText = $HBoxContainer/VBoxContainer2/NbJumpsInAirLabelText
 @onready var speedLinesContainer = $SpeedLinesContrainer
+@onready var dashesLabel = $HBoxContainer/VBoxContainer2/DashesLabel
 
 func _ready():
 	speedLinesContainer.visible = false #the speed lines will only be displayed when the character will dashing
@@ -64,6 +65,10 @@ func displaySpeedLines(dashTime):
 	#when the dash is finished, hide the speed lines
 	await get_tree().create_timer(dashTime).timeout
 	speedLinesContainer.visible = false 
+
+func displayDashes(dashes):
+	# This function manages the number of dashes avaliable
+	dashesLabel.set_text(str(dashes))
 	
 func _process(_delta):
 	#this function manage the frames per second displayment

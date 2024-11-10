@@ -73,8 +73,11 @@ var canWallRun : bool
 @export var dashTime : float
 var dashTimeRef : float
 @export var timeBeforeCanDashAgain : float 
+@export var dashCooldown : float
 var timeBeforeCanDashAgainRef : float 
 var velocityPreDash : Vector3 
+@export var maxDashes : int
+@onready var dashCharges := maxDashes
 
 #gravity variables
 @export_group("gravity variables")
@@ -89,6 +92,7 @@ var velocityPreDash : Vector3
 @onready var ceilingCheck = $CeilingCheck
 @onready var mesh = $MeshInstance3D
 @onready var hud = $HUD
+@onready var dashTimer := $DashTimer
 
 func _ready():
 	#set the start move speed
@@ -114,6 +118,9 @@ func _ready():
 	
 	#set the mesh scale of the character
 	mesh.scale = Vector3(1.0, 1.0, 1.0)
+	
+	dashTimer.wait_time = dashCooldown 
+	
 	
 func _process(_delta):
 	#the behaviours that is preferable to check every "visual" frame
@@ -224,6 +231,7 @@ func displayStats():
 	hud.displayDesiredMoveSpeed(desiredMoveSpeed)
 	hud.displayVelocity(velocity.length())
 	hud.displayNbJumpsAllowedInAir(nbJumpsInAirAllowed)
+	hud.displayDashes(dashCharges)
 	
 	#not a property, but a visual
 	if currentState == states.DASH: hud.displaySpeedLines(dashTime)
@@ -512,11 +520,13 @@ func slideStateChanges():
 			
 func dashStateChanges():
 	#condition here, the state is changed only if the character is moving (so has an input direction)
-	if inputDirection != Vector2.ZERO and timeBeforeCanDashAgain <= 0:
+	if inputDirection != Vector2.ZERO and dashCharges > 0:
 		currentState = states.DASH
 		moveSpeed = dashSpeed 
 		dashTime = dashTimeRef
 		velocityPreDash = velocity #save the pre dash velocity, to apply it when the dash is finished (to get back to a normal velocity)
+		dashCharges -= 1
+		dashTimer.start()
 		
 		if mesh.scale.y != 1.0:
 			mesh.scale.y = 1.0
@@ -549,3 +559,8 @@ func collisionHandling():
 			#here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
 			if layer & (1 << 3-1) != 0: canWallRun = true 
 			else: canWallRun = false 
+
+func _on_dash_timer_timeout() -> void:
+	dashCharges += 1
+	if dashCharges < maxDashes:
+		dashTimer.start()
