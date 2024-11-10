@@ -1,8 +1,23 @@
 extends CharacterBody3D
 
+# State Variables
+enum states {
+	IDLE, RUN, INAIR, DASHING
+}
+var current_state
+
 @export var look_sensitivity : float = 0.006
-@export var jump_velocity := 6.0
 @export var dash_power := 20.0
+
+# Jump Settings
+@export var jump_height : float = 5.0
+@export var jump_time_to_peak : float = 1.0
+@export var jump_time_to_fall : float = 1.0
+@onready var jump_velocity : float = (2.0 * jump_height) / jump_time_to_fall
+
+# Gravity Settings
+@onready var jump_gravity : float = (-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)
+@onready var fall_gravity : float = (-2.0 * jump_height) / (jump_time_to_fall * jump_time_to_fall)
 
 # Air Movement Settings
 @export var air_cap := 0.85
@@ -92,7 +107,11 @@ func _handle_ground_physics(delta) -> void:
 	self.velocity *= new_speed
 
 func _handle_air_physics(delta) -> void:
-	self.velocity.y -= ProjectSettings.get_setting('physics/3d/default_gravity') * delta
+	
+	if self.velocity.y >= 0.0:
+		self.velocity.y += jump_gravity * delta
+	else:
+		self.velocity.y += fall_gravity * delta
 	
 	# Movement recipe based on source/quake air movement.
 	var cur_speed_in_wish_dir = self.velocity.dot(wish_dir)
@@ -104,6 +123,10 @@ func _handle_air_physics(delta) -> void:
 		var accel_speed = air_accel * air_move_speed * delta
 		accel_speed = min(accel_speed, add_speed_till_cap) 
 		self.velocity += accel_speed * wish_dir
+
+# Handle jump, potential double jump functionality here...
+func _handle_jump():
+	self.velocity.y = jump_velocity
 
 func is_surface_too_steep(normal : Vector3) -> bool:
 	return normal.angle_to(Vector3.UP) > self.floor_max_angle
@@ -179,7 +202,7 @@ func _physics_process(delta: float):
 	if is_on_floor() or _snapped_to_stairs_last_frame:
 		# NOTE: using 'is_action_pressed' here allows for auto 'bhopping'. 
 		if Input.is_action_pressed("jump"):
-			self.velocity.y = jump_velocity
+			_handle_jump()
 		_handle_ground_physics(delta)
 	else:
 		_handle_air_physics(delta)
