@@ -66,10 +66,12 @@ num_stairs = 10
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_mtdib")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05795, 0)
+dash_power = 30.0
 jump_height = 3.0
 jump_time_to_peak = 0.5
 jump_time_to_fall = 0.5
-walk_speed = 15.0
+air_move_speed = 800.0
+walk_speed = 20.0
 
 [node name="TestDummy" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9685, 1.35041, -15.6164)

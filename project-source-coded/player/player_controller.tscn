@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjue1brner3wq"]
+[gd_scene load_steps=8 format=3 uid="uid://cjue1brner3wq"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_n0ogt"]
 [ext_resource type="PackedScene" uid="uid://b7djlp22nku24" path="res://weapon_manager/weapon_manager.tscn" id="2_xlhqo"]
 [ext_resource type="Resource" uid="uid://cw7oaxs3gcy0a" path="res://weapon_manager/blaster/blaster.tres" id="3_udmf6"]
 [ext_resource type="Script" path="res://debug/debug_ui.gd" id="4_u75la"]
+[ext_resource type="Texture2D" uid="uid://bdh34plw80ipt" path="res://textures/crosshairs/PNG/White Retina/crosshair188.png" id="5_2oy6u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kpql"]
 
@@ -91,3 +92,25 @@ text = "FPS: 0"
 [node name="Dashes" type="Label" parent="DebugUI/VBoxContainer"]
 layout_mode = 2
 text = "Dashes: 3"
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_2oy6u")
+expand_mode = 1

@@ -30,6 +30,11 @@ var current_state
 @export var ground_decel := 10.0
 @export var ground_friction := 6.0
 
+# Head Bobbing
+const HEADBOB_MOVE_AMOUNT = 0.06
+const HEADBOB_FREQUENCY = 1.4
+var headbob_time := 0.0
+
 const MAX_STEP_HEIGHT = 0.5
 var _snapped_to_stairs_last_frame := false
 var _last_frame_was_on_floor = -INF
@@ -95,6 +100,7 @@ func _handle_ground_physics(delta) -> void:
 	
 	var cur_speed_in_wish_dir = self.velocity.dot(wish_dir)
 	var add_speed_till_cap = walk_speed - cur_speed_in_wish_dir
+	_headbob_effect(delta)
 	if add_speed_till_cap > 0:
 		var accel_speed = ground_accel * delta * walk_speed
 		accel_speed = min(accel_speed, add_speed_till_cap)
@@ -193,6 +199,14 @@ func _snap_down_to_stairs_check() -> void:
 			apply_floor_snap()
 			did_snap = true
 	_snapped_to_stairs_last_frame = did_snap
+
+func _headbob_effect(delta):
+	headbob_time += delta * self.velocity.length()
+	%Camera3D.transform.origin = Vector3(
+		cos(headbob_time * HEADBOB_FREQUENCY * 0.5) * HEADBOB_MOVE_AMOUNT,
+		sin(headbob_time * HEADBOB_FREQUENCY) * HEADBOB_MOVE_AMOUNT,
+		0
+	)
 
 func _physics_process(delta: float):
 	
