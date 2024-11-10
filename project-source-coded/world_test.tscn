@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://un3t25ojosdj"]
+[gd_scene load_steps=11 format=3 uid="uid://un3t25ojosdj"]
 
 [ext_resource type="PackedScene" uid="uid://cjue1brner3wq" path="res://player/player_controller.tscn" id="1_mtdib"]
 [ext_resource type="Material" uid="uid://by3y4ryc85mc2" path="res://default_mat_2.tres" id="1_tpq3e"]
 [ext_resource type="Material" uid="uid://mh1b1qqde2wy" path="res://default_mat.tres" id="2_3ngrw"]
 [ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://CSGStairMaker3D.tscn" id="3_qns8b"]
+[ext_resource type="Script" path="res://rigid_body_3d.gd" id="5_3e1dv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jaftf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,6 +17,10 @@ sky_material = SubResource("ProceduralSkyMaterial_jaftf")
 background_mode = 2
 sky = SubResource("Sky_q1chv")
 tonemap_mode = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y1qkr"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xy31j"]
 
 [node name="World" type="Node3D"]
 
@@ -61,3 +66,25 @@ num_stairs = 10
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_mtdib")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05795, 0)
+
+[node name="TestDummy" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9685, 1.35041, -15.6164)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="TestDummy"]
+mass = 10.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -1, 0)
+script = ExtResource("5_3e1dv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestDummy/RigidBody3D"]
+shape = SubResource("CapsuleShape3D_y1qkr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestDummy/RigidBody3D"]
+mesh = SubResource("CapsuleMesh_xy31j")
+skeleton = NodePath("../..")
+
+[node name="Label3D" type="Label3D" parent="TestDummy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65969, 0)
+text = "HP: 1000"
+font_size = 127
+outline_size = 47
