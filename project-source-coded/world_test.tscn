@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cjue1brner3wq" path="res://player/player_controller.tscn" id="1_mtdib"]
 [ext_resource type="Material" uid="uid://by3y4ryc85mc2" path="res://default_mat_2.tres" id="1_tpq3e"]
 [ext_resource type="Material" uid="uid://mh1b1qqde2wy" path="res://default_mat.tres" id="2_3ngrw"]
-[ext_resource type="PackedScene" path="res://CSGStairMaker3D.tscn" id="3_qns8b"]
+[ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://CSGStairMaker3D.tscn" id="3_qns8b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jaftf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

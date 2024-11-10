@@ -19,14 +19,26 @@ const MAX_STEP_HEIGHT = 0.5
 var _snapped_to_stairs_last_frame := false
 var _last_frame_was_on_floor = -INF
 
+const VIEW_MODEL_LAYER = 9 
+const WORLD_MODEL_LAYER = 2
+
 # Store input direction for multiple usage
 var wish_dir := Vector3.ZERO
 
 func _ready():
 	# Hide player model from camera
+	update_view_model_masks()
+
+func update_view_model_masks():
 	for child in %WorldModel.find_children('*', 'VisualInstance3D'):
 		child.set_layer_mask_value(1,false)
-		child.set_layer_mask_value(2,true)
+		child.set_layer_mask_value(WORLD_MODEL_LAYER,true)
+	
+	# Disable shadows for weapon models
+	for child in %ViewModel.find_children('*', 'VisualInstance3D', true, false):
+		if child is GeometryInstance3D:
+			child.cast_shadow = false
+
 
 # Using this instead of input to allow for character controller use UI when mouse is captured
 func _unhandled_input(event: InputEvent) -> void:

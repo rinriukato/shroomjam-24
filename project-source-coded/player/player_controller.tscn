@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjue1brner3wq"]
+[gd_scene load_steps=6 format=3 uid="uid://cjue1brner3wq"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_n0ogt"]
+[ext_resource type="PackedScene" uid="uid://b7djlp22nku24" path="res://weapon_manager/weapon_manager.tscn" id="2_xlhqo"]
+[ext_resource type="Resource" uid="uid://cw7oaxs3gcy0a" path="res://weapon_manager/blaster/blaster.tres" id="3_udmf6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kpql"]
 
@@ -30,6 +32,18 @@ unique_name_in_owner = true
 [node name="Camera3D" type="Camera3D" parent="Head/CameraSmooth"]
 unique_name_in_owner = true
 cull_mask = 1048573
+
+[node name="BulletRayCast3D" type="RayCast3D" parent="Head/CameraSmooth/Camera3D"]
+target_position = Vector3(0, 0, -999)
+
+[node name="ViewModel" type="Node3D" parent="Head/CameraSmooth/Camera3D"]
+unique_name_in_owner = true
+
+[node name="WeaponManager" parent="." node_paths=PackedStringArray("player", "bullet_raycast", "view_model_container") instance=ExtResource("2_xlhqo")]
+current_weapon = ExtResource("3_udmf6")
+player = NodePath("..")
+bullet_raycast = NodePath("../Head/CameraSmooth/Camera3D/BulletRayCast3D")
+view_model_container = NodePath("../Head/CameraSmooth/Camera3D/ViewModel")
 
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
 unique_name_in_owner = true

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://cw7oaxs3gcy0a"]
+
+[ext_resource type="Script" path="res://weapon_manager/weapon_resource.gd" id="1_8limm"]
+[ext_resource type="PackedScene" uid="uid://cq3loigjiyen5" path="res://models/blaster.gltf" id="2_u07b1"]
+
+[resource]
+script = ExtResource("1_8limm")
+view_model = ExtResource("2_u07b1")
+view_model_pos = Vector3(0.125, -0.173, -0.293)
+view_model_rot = Vector3(0, -1.5708, -0.485202)
+view_model_scale = Vector3(1, 1, 1)
+damage = 10
