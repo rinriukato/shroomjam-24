@@ -14,6 +14,7 @@ extends Node3D
 @export var view_model_container : Node3D
 
 var current_weapon_view_model : Node3D
+var current_weapon_view_model_muzzle : Node3D
 
 @onready var audio_stream_player = $AudioStreamPlayer3D
 
@@ -35,6 +36,21 @@ func update_weapon_model() -> void:
 			player.update_view_model_masks()
 		
 		current_weapon.is_equipped = true
+		current_weapon_view_model_muzzle = view_model_container.find_child("Muzzle", true, false) if current_weapon_view_model else null
+
+func make_bullet_trail(target_pos : Vector3):
+	if current_weapon_view_model_muzzle == null:
+		return
+	var muzzle = current_weapon_view_model_muzzle
+	var bullet_dir = (target_pos - muzzle.global_position).normalized()
+	var start_pos = muzzle.global_position + bullet_dir * 0.25 # slightly infront of muzzle position
+	
+	if (target_pos - start_pos).length() > 3.0:
+		var bullet_tracer = preload("res://weapon_manager/blaster/bullet.tscn").instantiate()
+		player.add_sibling(bullet_tracer)
+		
+		bullet_tracer.target_pos = target_pos
+		bullet_tracer.look_at(target_pos)
 
 func play_sound(sound : AudioStream):
 	if sound:

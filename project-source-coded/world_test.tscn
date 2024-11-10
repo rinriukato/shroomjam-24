@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://un3t25ojosdj"]
 
-[ext_resource type="PackedScene" uid="uid://cjue1brner3wq" path="res://player/player_controller.tscn" id="1_mtdib"]
-[ext_resource type="Material" uid="uid://by3y4ryc85mc2" path="res://default_mat_2.tres" id="1_tpq3e"]
-[ext_resource type="Material" uid="uid://mh1b1qqde2wy" path="res://default_mat.tres" id="2_3ngrw"]
-[ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://CSGStairMaker3D.tscn" id="3_qns8b"]
-[ext_resource type="Script" path="res://rigid_body_3d.gd" id="5_3e1dv"]
+[ext_resource type="Material" uid="uid://by3y4ryc85mc2" path="res://Arts/default_mat_2.tres" id="1_tpq3e"]
+[ext_resource type="Material" uid="uid://mh1b1qqde2wy" path="res://Arts/default_mat.tres" id="2_3ngrw"]
+[ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://Scenes/CSGStairMaker3D.tscn" id="3_qns8b"]
+[ext_resource type="Script" path="res://Scenes/rigid_body_3d.gd" id="5_3e1dv"]
+[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="5_mjmwr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jaftf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -64,15 +64,6 @@ size = Vector3(4.25183, 2.79541, 5.10986)
 material = ExtResource("2_3ngrw")
 num_stairs = 10
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_mtdib")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05795, 0)
-dash_power = 30.0
-jump_height = 3.0
-jump_time_to_peak = 0.5
-jump_time_to_fall = 0.5
-air_move_speed = 800.0
-walk_speed = 20.0
-
 [node name="TestDummy" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9685, 1.35041, -15.6164)
 
@@ -94,3 +85,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65969, 0)
 text = "HP: 1000"
 font_size = 127
 outline_size = 47
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("5_mjmwr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.55231, 0)

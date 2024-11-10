@@ -1,8 +1,6 @@
 class_name WeaponResource
 extends Resource
 
-
-
 # First person persective gun model
 @export var view_model : PackedScene
 
@@ -68,10 +66,14 @@ func fire_shot():
 	raycast.target_position = Vector3(0,0,-abs(RAYCAST_DIST))
 	raycast.force_raycast_update()
 	
+	# Furtherest point bullet can travel based on raycast
+	var bullet_target = raycast.global_transform * raycast.target_position
+	
 	if raycast.is_colliding():
 		var object = raycast.get_collider()
 		var normal = raycast.get_collision_normal()
 		var point = raycast.get_collision_point()
+		bullet_target = point
 		
 		# Apply force to physics objects, not necessary rn
 		if object is RigidBody3D:
@@ -81,3 +83,5 @@ func fire_shot():
 		# Damage enemy
 		if object.has_method('take_damage'):
 			object.take_damage(self.damage)
+	
+	weapon_manager.make_bullet_trail(bullet_target)
