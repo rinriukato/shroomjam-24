@@ -43,8 +43,8 @@ floor_snap_length = 0.0
 platform_floor_layers = 4294901761
 script = ExtResource("1_5dbx1")
 maxSpeed = 50.0
-walkSpeed = 11.0
-runSpeed = 20.0
+walkSpeed = 20.0
+runSpeed = 30.0
 crouchSpeed = 7.0
 slideSpeedAddon = 8.0
 dashSpeed = 120.0
@@ -67,6 +67,7 @@ wallJumpVelocity = 3.0
 dashTime = 0.09
 timeBeforeCanDashAgain = 2.0
 dashCooldown = 1.0
+maxDashes = 3
 wallGravityMultiplier = 0.7
 
 [node name="standingHitbox" type="CollisionShape3D" parent="."]

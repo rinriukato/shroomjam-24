@@ -6,9 +6,9 @@
 script/source = "extends Node3D
 
 
-@export var explosion_force = 15.0
+@export var explosion_force = 20.0
 @export var explosion_duration = 0.7333
-@export var max_explosion_dist = 3.5
+@export var max_explosion_dist = 5.5
 @export var damage = 50
 
 # Called when the node enters the scene tree for the first time.

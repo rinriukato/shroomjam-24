@@ -3,7 +3,7 @@ extends WeaponResource
 
 @export var projectile : PackedScene
 @export var projectile_relative_velocity := Vector3(0,0,-15)
-@export var projectile_relative_spawn_pos := Vector3(0,0,-3) # Spawn slightly infront of player
+@export var projectile_relative_spawn_pos := Vector3(0,0,-1) # Spawn slightly infront of player
 @export var projectile_relative_spawn_rotation := Vector3(0,0,0)
 
 func fire_shot():
@@ -31,4 +31,4 @@ func fire_shot():
 	obj.global_transform = raycast.global_transform * Transform3D(
 		Basis.from_euler(projectile_relative_spawn_rotation), rel_spawn_pos)
 		
-	obj.linear_velocity = weapon_manager.player.velocity + raycast.global_transform.basis * projectile_relative_velocity
+	#obj.linear_velocity = weapon_manager.player.velocity + raycast.global_transform.basis * projectile_relative_velocity
