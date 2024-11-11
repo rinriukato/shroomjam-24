@@ -29,6 +29,7 @@ extends Resource
 @export var fire_rate : float # in miliseconds
 @export var is_purify : bool
 @export var is_corrupt : bool
+@export var is_auto : bool
 var weapon_manager : WeaponManager
 
 

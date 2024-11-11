@@ -68,17 +68,16 @@ func queue_anim(anim_name : String):
 	# The model itself MUST have the animation player node
 	if not anim_player: return
 	anim_player.queue(anim_name)
-
+	
+# Single fire functionality 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_weapon and is_inside_tree():
-		if event.is_action_pressed('shoot') and allow_shoot and is_ready_to_shoot:
-			current_weapon.trigger_down = true
-			print("Setting wait to: %f" % current_weapon.fire_rate)
-			fire_rate_cooldown_timer.wait_time = current_weapon.fire_rate
-			fire_rate_cooldown_timer.start()
-			is_ready_to_shoot = false
-		elif event.is_action_released('shoot'):
-			current_weapon.trigger_down = false
+		if not current_weapon.is_auto:
+			if event.is_action_pressed('shoot') and allow_shoot and is_ready_to_shoot:
+				current_weapon.trigger_down = true
+				set_fire_rate_cooldown(current_weapon.fire_rate)
+			elif event.is_action_released('shoot'):
+				current_weapon.trigger_down = false
 
 func _ready() -> void:
 	update_weapon_model()
@@ -87,6 +86,25 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if hud == null: return
 
+# This is PURELY for auto fire functionality
+func _physics_process(_delta: float) -> void:
+	if not current_weapon.is_auto: return
+	
+	# NOTE: This is a bit of a scuffed method for full-auto, but it works and
+	# should interface with the existing trigger_down and up methods.
+	if Input.is_action_pressed('shoot') and allow_shoot and is_ready_to_shoot:
+		current_weapon.on_trigger_down()
+		current_weapon.trigger_down = true
+		set_fire_rate_cooldown(current_weapon.fire_rate)
+		
+	elif Input.is_action_just_released('shoot'):
+		current_weapon.trigger_down = false
+			
+
+func set_fire_rate_cooldown(wait_time : float):
+	fire_rate_cooldown_timer.wait_time = wait_time
+	fire_rate_cooldown_timer.start()
+	is_ready_to_shoot = false
+
 func _on_fire_rate_cooldown_timeout() -> void:
 	is_ready_to_shoot = true
-	print('ready to fire')
