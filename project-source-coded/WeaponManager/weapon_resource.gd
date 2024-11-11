@@ -3,6 +3,8 @@ extends Resource
 
 # First person persective gun model
 @export var view_model : PackedScene
+# Bullet Tracer/Projectile
+@export var bullet : PackedScene
 
 @export_group("View Model Position")
 @export var view_model_pos : Vector3
@@ -23,13 +25,12 @@ extends Resource
 
 # Weapon properties
 @export_group("Weapon Properties")
-@export var damage = 10
-@export var is_purify = false
-@export var is_corrupt = false
+@export var damage : float = 10
+@export var fire_rate : float # in miliseconds
+@export var is_purify : bool
+@export var is_corrupt : bool
 var weapon_manager : WeaponManager
 
-# Bullet Tracer/Projectile
-@export var bullet : PackedScene
 
 # Weapon Logic
 var trigger_down := false :
@@ -52,7 +53,7 @@ var is_equipped := false :
 				on_unequip()
 
 func on_trigger_down():
-	fire_shot(weapon_manager.get_gun_level())
+	fire_shot()
 
 func on_trigger_up():
 	pass
@@ -65,7 +66,7 @@ func on_equip():
 func on_unequip():
 	pass
 
-func fire_shot(gun_level : int):
+func fire_shot():
 	weapon_manager.play_sound(shoot_sound)
 	weapon_manager.queue_anim(view_shoot_anim)
 	weapon_manager.queue_anim(view_idle_anim)

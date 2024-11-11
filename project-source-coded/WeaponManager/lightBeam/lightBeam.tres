@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=6 format=3 uid="uid://cw7oaxs3gcy0a"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://cw7oaxs3gcy0a"]
 
-[ext_resource type="PackedScene" uid="uid://fho2di44tj10" path="res://Scenes/bullet_tracer.tscn" id="1_cledt"]
 [ext_resource type="Script" path="res://WeaponManager/weapon_resource.gd" id="2_s0j6n"]
 [ext_resource type="AudioStream" uid="uid://1mserrwmarll" path="res://WeaponManager/sounds/531861__superphat__scifiheavyblastershot.wav" id="3_otid0"]
 [ext_resource type="AudioStream" uid="uid://il8rqgg7uaf6" path="res://WeaponManager/sounds/668358__adhdreaming__selection-selected.wav" id="4_43tud"]
@@ -18,7 +17,7 @@ view_shoot_anim = "Shoot"
 view_reload_anim = ""
 shoot_sound = ExtResource("3_otid0")
 unholster_sound = ExtResource("4_43tud")
-damage = 10
+damage = 10.0
+fire_rate = 0.5
 is_purify = true
 is_corrupt = false
-bullet = ExtResource("1_cledt")

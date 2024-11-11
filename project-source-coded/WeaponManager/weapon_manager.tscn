@@ -7,3 +7,7 @@ script = ExtResource("1_rpq7x")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 volume_db = -2.0
+
+[node name="FireRateCooldown" type="Timer" parent="."]
+
+[connection signal="timeout" from="FireRateCooldown" to="." method="_on_fire_rate_cooldown_timeout"]

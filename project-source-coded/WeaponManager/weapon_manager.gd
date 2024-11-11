@@ -20,6 +20,9 @@ var current_weapon_view_model_muzzle : Node3D
 @onready var audio_stream_player = $AudioStreamPlayer3D
 @onready var hud = $"../HUD"
 
+@onready var fire_rate_cooldown_timer = $FireRateCooldown
+var is_ready_to_shoot : bool
+
 # Update weapon model on spawn or on change
 func update_weapon_model() -> void:
 	if current_weapon != null:
@@ -68,14 +71,22 @@ func queue_anim(anim_name : String):
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_weapon and is_inside_tree():
-		if event.is_action_pressed('shoot') and allow_shoot:
+		if event.is_action_pressed('shoot') and allow_shoot and is_ready_to_shoot:
 			current_weapon.trigger_down = true
+			print("Setting wait to: %f" % current_weapon.fire_rate)
+			fire_rate_cooldown_timer.wait_time = current_weapon.fire_rate
+			fire_rate_cooldown_timer.start()
+			is_ready_to_shoot = false
 		elif event.is_action_released('shoot'):
 			current_weapon.trigger_down = false
 
-
 func _ready() -> void:
 	update_weapon_model()
+	is_ready_to_shoot = true
 
 func _process(_delta: float) -> void:
 	if hud == null: return
+
+func _on_fire_rate_cooldown_timeout() -> void:
+	is_ready_to_shoot = true
+	print('ready to fire')
