@@ -1,10 +1,6 @@
 class_name WeaponManager
 extends Node3D
 
-# Gun Level
-var gun_level : int = 0
-var xp : int = 0
-
 # For stopping weapon shooting while menus are open
 @export var allow_shoot : bool = true
 
@@ -77,22 +73,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action_released('shoot'):
 			current_weapon.trigger_down = false
 
-func get_gun_level() -> int:
-	return gun_level
-
-func level_change():
-	if xp >= current_weapon.xp_to_level[gun_level]:
-		gun_level = min(2, gun_level + 1) # So we don't go higher than 2
-		xp = 0
-	if xp < 0:
-		gun_level = max(0, gun_level - 1)
-		xp = current_weapon.xp_to_level[gun_level] / 2
 
 func _ready() -> void:
 	update_weapon_model()
 
 func _process(_delta: float) -> void:
 	if hud == null: return
-	
-	hud.displayXP(xp)
-	hud.displayLevel(gun_level)

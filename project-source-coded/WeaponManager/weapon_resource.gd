@@ -4,24 +4,28 @@ extends Resource
 # First person persective gun model
 @export var view_model : PackedScene
 
+@export_group("View Model Position")
 @export var view_model_pos : Vector3
 @export var view_model_rot : Vector3
 @export var view_model_scale := Vector3(1,1,1)
 
 # Animations
+@export_group("Animations")
 @export var view_idle_anim : String
 @export var view_equip_anim : String
 @export var view_shoot_anim : String
 @export var view_reload_anim : String
 
 # Sounds
+@export_group("Sounds")
 @export var shoot_sound : AudioStream
 @export var unholster_sound : AudioStream
 
 # Weapon properties
-@export var damage = [10, 20, 40]
-@export var xp_to_level = [10, 20, 30]
-@export var fire_rate = 1
+@export_group("Weapon Properties")
+@export var damage = 10
+@export var is_purify = false
+@export var is_corrupt = false
 var weapon_manager : WeaponManager
 
 # Bullet Tracer/Projectile
@@ -85,4 +89,13 @@ func fire_shot(gun_level : int):
 		
 		# Damage enemy
 		if object.has_method('take_damage'):
-			object.take_damage(self.damage[gun_level])
+			
+			if is_purify:
+				# Do some effect to enemy's purify function
+				pass
+			
+			if is_corrupt:
+				# do some effect to enemy's corrupt function
+				pass
+			
+			object.take_damage(self.damage)

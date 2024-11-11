@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://un3t25ojosdj"]
+[gd_scene load_steps=11 format=3 uid="uid://un3t25ojosdj"]
 
 [ext_resource type="Material" uid="uid://by3y4ryc85mc2" path="res://Arts/default_mat_2.tres" id="1_eyvej"]
 [ext_resource type="Material" uid="uid://mh1b1qqde2wy" path="res://Arts/default_mat.tres" id="2_irko4"]
 [ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://Scenes/CSGStairMaker3D.tscn" id="3_uvfif"]
 [ext_resource type="Script" path="res://Scenes/rigid_body_3d.gd" id="4_tudgs"]
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="5_4t5ue"]
-[ext_resource type="PackedScene" uid="uid://dtuuuoiqcmlgs" path="res://Scenes/xp_pickup.tscn" id="6_uwjpy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jaftf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -92,6 +91,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.55231, 0)
 walkSpeed = 20.0
 runSpeed = 30.0
 maxDashes = 3
-
-[node name="XpPickup" parent="." instance=ExtResource("6_uwjpy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3264, 1.84171, -23.3676)
