@@ -12,6 +12,9 @@ class_name HUD
 @onready var nbJumpsAllowedInAirLabelText = $HBoxContainer/VBoxContainer2/NbJumpsInAirLabelText
 @onready var speedLinesContainer = $SpeedLinesContrainer
 @onready var dashesLabel = $HBoxContainer/VBoxContainer2/DashesLabel
+@onready var positionLabel = $HBoxContainer/VBoxContainer2/Position
+@onready var xpLabel = $HBoxContainer/VBoxContainer2/XP
+@onready var levelLabel = $HBoxContainer/VBoxContainer2/GunLevel
 
 func _ready():
 	speedLinesContainer.visible = false #the speed lines will only be displayed when the character will dashing
@@ -69,7 +72,17 @@ func displaySpeedLines(dashTime):
 func displayDashes(dashes):
 	# This function manages the number of dashes avaliable
 	dashesLabel.set_text(str(dashes))
-	
+
+func displayPosition(pos):
+	positionLabel.set_text((str(pos)))
+
+func displayXP(xp):
+	positionLabel.set_text((str(xp)))
+
+func displayLevel(level):
+	levelLabel.set_text((str(level)))
+
+
 func _process(_delta):
 	#this function manage the frames per second displayment
 	framesPerSecondLabelText.set_text(str(Engine.get_frames_per_second()))

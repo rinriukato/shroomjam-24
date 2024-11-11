@@ -1,11 +1,11 @@
 Model Information:
-* title:	Sci-fi low poly Gun
-* source:	https://sketchfab.com/3d-models/sci-fi-low-poly-gun-d8dbf3598425477c8a2debc6507e298f
-* author:	MrPuppet (https://sketchfab.com/MrPuppet)
+* title:	Pixel Pistol 23
+* source:	https://sketchfab.com/3d-models/pixel-pistol-23-aed3cdcff0f4496fab44a81e5f3c5f36
+* author:	Firewarden (https://sketchfab.com/Firewarden)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Sci-fi low poly Gun" (https://sketchfab.com/3d-models/sci-fi-low-poly-gun-d8dbf3598425477c8a2debc6507e298f) by MrPuppet (https://sketchfab.com/MrPuppet) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "Pixel Pistol 23" (https://sketchfab.com/3d-models/pixel-pistol-23-aed3cdcff0f4496fab44a81e5f3c5f36) by Firewarden (https://sketchfab.com/Firewarden) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=15 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
+[ext_resource type="PackedScene" uid="uid://b7djlp22nku24" path="res://weapon_manager/weapon_manager.tscn" id="3_3saur"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDScript.gd" id="3_l04tv"]
+[ext_resource type="Resource" uid="uid://cw7oaxs3gcy0a" path="res://weapon_manager/pistol/pistol.tres" id="4_sh4rp"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDRedimensionmentScript.gd" id="5_jgfg0"]
 [ext_resource type="Shader" path="res://Arts/Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
 
@@ -106,6 +108,16 @@ fov = 100.0
 near = 0.01
 far = 1000.0
 
+[node name="ViewModel" type="Node3D" parent="CameraHolder/Camera3D"]
+unique_name_in_owner = true
+
+[node name="BulletRayCast3D" type="RayCast3D" parent="CameraHolder/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -100)
+
+[node name="BulletRayCastEnd" type="Node3D" parent="CameraHolder/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.047, 0.02, -101)
+
 [node name="CeilingCheck" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.758088, 0)
 visible = false
@@ -113,6 +125,13 @@ exclude_parent = false
 target_position = Vector3(0, 4, 0)
 collide_with_areas = true
 debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="WeaponManager" parent="." node_paths=PackedStringArray("player", "bullet_raycast", "bullet_raycast_end", "view_model_container") instance=ExtResource("3_3saur")]
+current_weapon = ExtResource("4_sh4rp")
+player = NodePath("..")
+bullet_raycast = NodePath("../CameraHolder/Camera3D/BulletRayCast3D")
+bullet_raycast_end = NodePath("../CameraHolder/Camera3D/BulletRayCastEnd")
+view_model_container = NodePath("../CameraHolder/Camera3D/ViewModel")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 layers = 2
@@ -181,7 +200,7 @@ mouse_filter = 1
 layout_mode = 0
 offset_left = 7.0
 offset_right = 811.0
-offset_bottom = 350.0
+offset_bottom = 468.0
 script = ExtResource("5_jgfg0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer"]
@@ -194,12 +213,14 @@ theme_override_font_sizes/font_size = 40
 text = "Current state : "
 
 [node name="MoveSpeedLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+visible = false
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Move speed : "
 
 [node name="DesiredMoveSpeedLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+visible = false
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
@@ -219,6 +240,7 @@ theme_override_font_sizes/font_size = 40
 text = "Frames per seconds : "
 
 [node name="NbJumpsInAirLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+visible = false
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
@@ -230,6 +252,26 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Dashes avaliable : "
 
+[node name="Position" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Position:
+"
+
+[node name="XP" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "XP :"
+
+[node name="GunLevel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Gun Level :"
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="HUD/HBoxContainer"]
 layout_mode = 2
 
@@ -240,12 +282,14 @@ theme_override_font_sizes/font_size = 40
 text = "..................."
 
 [node name="MoveSpeedLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+visible = false
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "..................."
 
 [node name="DesiredMoveSpeedLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+visible = false
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
@@ -264,6 +308,7 @@ theme_override_font_sizes/font_size = 40
 text = "..................."
 
 [node name="NbJumpsInAirLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+visible = false
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
@@ -274,6 +319,28 @@ texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "..................."
+
+[node name="Position" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "...................
+"
+
+[node name="XP" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "...................
+"
+
+[node name="GunLevel" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "...................
+"
 
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true

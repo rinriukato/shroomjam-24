@@ -1,8 +1,9 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://mh1b1qqde2wy"]
 
-[ext_resource type="Texture2D" uid="uid://daq3d5pc7e2vt" path="res://Arts/Textures/kenney_prototype_textures/dark/texture_01.png" id="1_tcxmd"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qhj42"]
+load_path = "res://.godot/imported/texture_08.png-80a67cbfd1fe51d61f9e414f0dbf9a1d.s3tc.ctex"
 
 [resource]
 albedo_color = Color(0.259294, 0.259294, 0.259294, 1)
-albedo_texture = ExtResource("1_tcxmd")
+albedo_texture = SubResource("CompressedTexture2D_qhj42")
 uv1_triplanar = true

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtuuuoiqcmlgs"]
+
+[ext_resource type="Script" path="res://xp_pickup.gd" id="1_5kyom"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqdhp"]
+albedo_color = Color(1, 0.803922, 0.027451, 1)
+emission_enabled = true
+emission = Color(1, 0.803922, 0.027451, 1)
+emission_energy_multiplier = 3.31
+
+[sub_resource type="PrismMesh" id="PrismMesh_frr72"]
+material = SubResource("StandardMaterial3D_qqdhp")
+size = Vector3(0.2, 0.2, 0.05)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2c01k"]
+radius = 0.261988
+
+[node name="XpPickup" type="Area3D"]
+script = ExtResource("1_5kyom")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_frr72")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00047753, 0.00669343, -0.00421143)
+shape = SubResource("SphereShape3D_2c01k")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

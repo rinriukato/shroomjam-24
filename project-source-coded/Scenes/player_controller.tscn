@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/SourcePlayerCharacter/player_controller.gd" id="1_n0ogt"]
 [ext_resource type="PackedScene" uid="uid://b7djlp22nku24" path="res://weapon_manager/weapon_manager.tscn" id="2_xlhqo"]
-[ext_resource type="Resource" uid="uid://cw7oaxs3gcy0a" path="res://weapon_manager/blaster/blaster.tres" id="3_udmf6"]
+[ext_resource type="Resource" uid="uid://cw7oaxs3gcy0a" path="res://weapon_manager/pistol/pistol.tres" id="3_udmf6"]
 [ext_resource type="Script" path="res://debug/debug_ui.gd" id="4_u75la"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kpql"]

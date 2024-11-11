@@ -85,6 +85,9 @@ var velocityPreDash : Vector3
 @onready var fallGravity : float = (-2.0 * jumpHeight) / (jumpTimeToFall * jumpTimeToFall)
 @export var wallGravityMultiplier : float
 
+# HP
+@export var hp : float = 100
+
 #references variables
 @onready var cameraHolder = $CameraHolder
 @onready var standHitbox = $standingHitbox
@@ -120,7 +123,6 @@ func _ready():
 	mesh.scale = Vector3(1.0, 1.0, 1.0)
 	
 	dashTimer.wait_time = dashCooldown 
-	
 	
 func _process(_delta):
 	#the behaviours that is preferable to check every "visual" frame
@@ -232,6 +234,7 @@ func displayStats():
 	hud.displayVelocity(velocity.length())
 	hud.displayNbJumpsAllowedInAir(nbJumpsInAirAllowed)
 	hud.displayDashes(dashCharges)
+	hud.displayPosition(global_position)
 	
 	#not a property, but a visual
 	if currentState == states.DASH: hud.displaySpeedLines(dashTime)
@@ -559,6 +562,9 @@ func collisionHandling():
 			#here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
 			if layer & (1 << 3-1) != 0: canWallRun = true 
 			else: canWallRun = false 
+
+func take_damage(damage : float):
+	hp -= damage
 
 func _on_dash_timer_timeout() -> void:
 	dashCharges += 1

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://un3t25ojosdj"]
+[gd_scene load_steps=12 format=3 uid="uid://un3t25ojosdj"]
 
-[ext_resource type="Material" uid="uid://by3y4ryc85mc2" path="res://Arts/default_mat_2.tres" id="1_tpq3e"]
-[ext_resource type="Material" uid="uid://mh1b1qqde2wy" path="res://Arts/default_mat.tres" id="2_3ngrw"]
-[ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://Scenes/CSGStairMaker3D.tscn" id="3_qns8b"]
-[ext_resource type="Script" path="res://Scenes/rigid_body_3d.gd" id="5_3e1dv"]
-[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="5_mjmwr"]
+[ext_resource type="Material" uid="uid://by3y4ryc85mc2" path="res://Arts/default_mat_2.tres" id="1_eyvej"]
+[ext_resource type="Material" uid="uid://mh1b1qqde2wy" path="res://Arts/default_mat.tres" id="2_irko4"]
+[ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://Scenes/CSGStairMaker3D.tscn" id="3_uvfif"]
+[ext_resource type="Script" path="res://Scenes/rigid_body_3d.gd" id="4_tudgs"]
+[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="5_4t5ue"]
+[ext_resource type="PackedScene" uid="uid://dtuuuoiqcmlgs" path="res://Scenes/xp_pickup.tscn" id="6_uwjpy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jaftf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -37,31 +38,31 @@ use_collision = true
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.11035)
 size = Vector3(100, 1, 100)
-material = ExtResource("1_tpq3e")
+material = ExtResource("1_eyvej")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
 radius = 19.905
-material = ExtResource("2_3ngrw")
+material = ExtResource("2_irko4")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2657, 3.00895, 0)
 size = Vector3(5, 5, 5)
-material = ExtResource("2_3ngrw")
+material = ExtResource("2_irko4")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8157, 1.90996, 0)
 size = Vector3(3, 3, 3)
-material = ExtResource("2_3ngrw")
+material = ExtResource("2_irko4")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8157, 1.24282, -5.07044)
 size = Vector3(1.5, 1.5, 1.5)
-material = ExtResource("2_3ngrw")
+material = ExtResource("2_irko4")
 
-[node name="CSGStairMaker3D" parent="CSGCombiner3D" instance=ExtResource("3_qns8b")]
+[node name="CSGStairMaker3D" parent="CSGCombiner3D" instance=ExtResource("3_uvfif")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5071, 1.89516, -27.6979)
 size = Vector3(4.25183, 2.79541, 5.10986)
-material = ExtResource("2_3ngrw")
+material = ExtResource("2_irko4")
 num_stairs = 10
 
 [node name="TestDummy" type="Node3D" parent="."]
@@ -71,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9685, 1.35041, -15.6164)
 mass = 10.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -1, 0)
-script = ExtResource("5_3e1dv")
+script = ExtResource("4_tudgs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestDummy/RigidBody3D"]
 shape = SubResource("CapsuleShape3D_y1qkr")
@@ -86,8 +87,11 @@ text = "HP: 1000"
 font_size = 127
 outline_size = 47
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("5_mjmwr")]
+[node name="PlayerCharacter" parent="." instance=ExtResource("5_4t5ue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.55231, 0)
 walkSpeed = 20.0
 runSpeed = 30.0
 maxDashes = 3
+
+[node name="XpPickup" parent="." instance=ExtResource("6_uwjpy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3264, 1.84171, -23.3676)

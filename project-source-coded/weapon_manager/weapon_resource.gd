@@ -19,9 +19,13 @@ extends Resource
 @export var unholster_sound : AudioStream
 
 # Weapon properties
-@export var damage = 10
+@export var damage = [10, 20, 40]
+@export var xp_to_level = [10, 20, 30]
+@export var fire_rate = 1
 var weapon_manager : WeaponManager
-const RAYCAST_DIST : float = 9999
+
+# Bullet Tracer/Projectile
+@export var bullet : PackedScene
 
 # Weapon Logic
 var trigger_down := false :
@@ -44,36 +48,35 @@ var is_equipped := false :
 				on_unequip()
 
 func on_trigger_down():
-	fire_shot()
+	fire_shot(weapon_manager.get_gun_level())
 
 func on_trigger_up():
 	pass
 
 func on_equip():
 	# Play animations for equipping here, example below
-	#weapon_manager.play_anim(current_weapon.view_idle_anim)
+	weapon_manager.queue_anim(view_idle_anim)
 	pass
 
 func on_unequip():
 	pass
 
-func fire_shot():
+func fire_shot(gun_level : int):
 	weapon_manager.play_sound(shoot_sound)
-	# Play shooting animation here?
-	# Queue idle animation here
+	weapon_manager.queue_anim(view_shoot_anim)
+	weapon_manager.queue_anim(view_idle_anim)
+	
+	# Currently none functional.
+	#weapon_manager.make_bullet_trail()
 	
 	var raycast = weapon_manager.bullet_raycast
-	raycast.target_position = Vector3(0,0,-abs(RAYCAST_DIST))
 	raycast.force_raycast_update()
 	
 	# Furtherest point bullet can travel based on raycast
-	var bullet_target = raycast.global_transform * raycast.target_position
-	
 	if raycast.is_colliding():
 		var object = raycast.get_collider()
 		var normal = raycast.get_collision_normal()
 		var point = raycast.get_collision_point()
-		bullet_target = point
 		
 		# Apply force to physics objects, not necessary rn
 		if object is RigidBody3D:
@@ -82,6 +85,4 @@ func fire_shot():
 		
 		# Damage enemy
 		if object.has_method('take_damage'):
-			object.take_damage(self.damage)
-	
-	weapon_manager.make_bullet_trail(bullet_target)
+			object.take_damage(self.damage[gun_level])
