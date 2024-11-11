@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
 [ext_resource type="PackedScene" uid="uid://b7djlp22nku24" path="res://WeaponManager/weapon_manager.tscn" id="3_3saur"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDScript.gd" id="3_l04tv"]
-[ext_resource type="Resource" uid="uid://cw7oaxs3gcy0a" path="res://WeaponManager/lightBeam/lightBeam.tres" id="4_sh4rp"]
+[ext_resource type="Resource" uid="uid://cr1r4co0mhflt" path="res://WeaponManager/RocketLauncher/rocket_launcher.tres" id="4_xl0p8"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDRedimensionmentScript.gd" id="5_jgfg0"]
 [ext_resource type="Shader" path="res://Arts/Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
 
@@ -127,7 +127,7 @@ collide_with_areas = true
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="WeaponManager" parent="." node_paths=PackedStringArray("player", "bullet_raycast", "bullet_raycast_end", "view_model_container") instance=ExtResource("3_3saur")]
-current_weapon = ExtResource("4_sh4rp")
+current_weapon = ExtResource("4_xl0p8")
 player = NodePath("..")
 bullet_raycast = NodePath("../CameraHolder/Camera3D/BulletRayCast3D")
 bullet_raycast_end = NodePath("../CameraHolder/Camera3D/BulletRayCastEnd")

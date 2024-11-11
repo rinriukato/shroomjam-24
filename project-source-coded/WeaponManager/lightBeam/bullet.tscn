@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cxsvlk0eoj6jk"]
 
-[ext_resource type="Script" path="res://WeaponManager/lightBeam/bullet.gd" id="1_pqfto"]
+[ext_resource type="Script" path="res://WeaponManager/LightBeam/bullet.gd" id="1_pqfto"]
 
 [sub_resource type="Gradient" id="Gradient_imbwr"]
 offsets = PackedFloat32Array(0, 0.00892857, 0.991071, 1)

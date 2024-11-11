@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://cr1r4co0mhflt"]
+
+[ext_resource type="Script" path="res://WeaponManager/projectile_weapon_resource.gd" id="1_516co"]
+[ext_resource type="PackedScene" uid="uid://bcpotul7h4ant" path="res://WeaponManager/RocketLauncher/rocket.tscn" id="1_llmxf"]
+[ext_resource type="PackedScene" uid="uid://cpk3xq10fjvo7" path="res://Arts/models/pistol.gltf" id="3_unajm"]
+
+[resource]
+script = ExtResource("1_516co")
+projectile = ExtResource("1_llmxf")
+projectile_relative_velocity = Vector3(0, 0, -15)
+projectile_relative_spawn_pos = Vector3(0, 0, -3)
+projectile_relative_spawn_rotation = Vector3(0, 0, 0)
+view_model = ExtResource("3_unajm")
+view_model_pos = Vector3(0.253, -0.215, -0.214)
+view_model_rot = Vector3(0, 3.14159, 0)
+view_model_scale = Vector3(0.14, 0.14, 0.14)
+view_idle_anim = ""
+view_equip_anim = ""
+view_shoot_anim = ""
+view_reload_anim = ""
+damage = 50.0
+fire_rate = 1.0
+is_purify = false
+is_corrupt = true
+is_auto = false

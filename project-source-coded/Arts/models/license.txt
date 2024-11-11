@@ -1,11 +1,11 @@
 Model Information:
-* title:	Pixel Pistol 23
-* source:	https://sketchfab.com/3d-models/pixel-pistol-23-aed3cdcff0f4496fab44a81e5f3c5f36
-* author:	Firewarden (https://sketchfab.com/Firewarden)
+* title:	explosion
+* source:	https://sketchfab.com/3d-models/explosion-d82e6104bf1044f18822e338d5ad42b4
+* author:	LEON elenaisakova248 (https://sketchfab.com/elenaisakova248)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Pixel Pistol 23" (https://sketchfab.com/3d-models/pixel-pistol-23-aed3cdcff0f4496fab44a81e5f3c5f36) by Firewarden (https://sketchfab.com/Firewarden) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "explosion" (https://sketchfab.com/3d-models/explosion-d82e6104bf1044f18822e338d5ad42b4) by LEON elenaisakova248 (https://sketchfab.com/elenaisakova248) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

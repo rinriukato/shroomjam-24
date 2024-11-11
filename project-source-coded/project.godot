@@ -13,7 +13,7 @@ config_version=5
 config/name="Project Source-coded"
 run/main_scene="res://Scenes/world_test.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Arts/icon.svg"
 
 [input]
 

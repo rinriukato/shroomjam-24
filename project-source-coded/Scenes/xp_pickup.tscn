@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dtuuuoiqcmlgs"]
 
-[ext_resource type="Script" path="res://xp_pickup.gd" id="1_5kyom"]
+[ext_resource type="Script" path="res://Scripts/Others/xp_pickup.gd" id="1_5kyom"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwljc"]
 albedo_color = Color(1, 0.733333, 0.184314, 1)

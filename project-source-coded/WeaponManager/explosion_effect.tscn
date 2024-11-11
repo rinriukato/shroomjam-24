@@ -1,0 +1,161 @@
+[gd_scene load_steps=9 format=3 uid="uid://4a0dx87jxcq2"]
+
+[ext_resource type="AudioStream" uid="uid://xrsoqy3lgv84" path="res://WeaponManager/sounds/607253__d4xx__bass-impact.wav" id="1_kwdn3"]
+
+[sub_resource type="GDScript" id="GDScript_iwkmy"]
+script/source = "extends Node3D
+
+
+@export var explosion_force = 15.0
+@export var explosion_duration = 0.7333
+@export var max_explosion_dist = 3.5
+@export var damage = 50
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$AnimationPlayer.play('Explode')
+	$AudioStreamPlayer3D.play()
+	
+	# Await to 2 physics for Area3D to update body list
+	# Area3D doesn't have any overlapping bodies detected since it spawned in
+	# so we need to await a couple of frames for Area3D to detect them
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	push_away_objects()
+	
+	var timer := get_tree().create_timer(explosion_duration)
+	timer.timeout.connect(func(): self.queue_free())
+
+func push_away_objects():
+	for body in $Area3D.get_overlapping_bodies():
+		var body_pos = body.global_position
+		var force_div = 1.0
+		
+		# Bias the player upward for rocket jumping
+		if body is CharacterBody3D:
+			body_pos.y += 1.0
+			force_div = 4.0
+		elif body is RigidBody3D:
+			force_div = max(0.01, body.mass)
+		
+		var force_dir = self.global_position.direction_to(body_pos)
+		var body_dist = (body_pos - self.global_position).length()
+		
+		# NOTE: Higher explosion force the closer you are to the explosion via body_dist / max_explosion_dist 
+		var random_vector = lerp(0.0, explosion_force, 1.0 - clampf((body_dist / max_explosion_dist), 0.0, 1.0)) / force_div * force_dir
+		
+		# Apply force to rigid bodies physics
+		if body is RigidBody3D:
+			body.apply_impulse(random_vector * explosion_force)
+		# ROCKET JUMP!
+		elif body is CharacterBody3D:
+			body.velocity += random_vector * explosion_force
+		
+		if body.has_method(\"take_damage\"):
+			body.take_damage(damage)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a50wx"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 0.266667, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.427451, 0.219608, 1)
+emission_energy_multiplier = 3.9
+emission_operator = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_o14vk"]
+material = SubResource("StandardMaterial3D_a50wx")
+radial_segments = 8
+rings = 6
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xsm56"]
+radius = 3.5
+
+[sub_resource type="Animation" id="Animation_1fxhi"]
+resource_name = "Explode"
+length = 0.7333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.5, 3.5, 3.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion/InnerExplosion:mesh:material:albedo_color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7333),
+"transitions": PackedFloat32Array(0.341511, 1),
+"update": 0,
+"values": [Color(1, 0.266667, 0, 1), Color(1, 0.266667, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3cao5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion/InnerExplosion:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.266667, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jur3c"]
+_data = {
+"Explode": SubResource("Animation_1fxhi"),
+"RESET": SubResource("Animation_3cao5")
+}
+
+[node name="ExplosionEffect" type="Node3D"]
+script = SubResource("GDScript_iwkmy")
+
+[node name="Explosion" type="Node3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="InnerExplosion" type="MeshInstance3D" parent="Explosion"]
+mesh = SubResource("SphereMesh_o14vk")
+
+[node name="OuterExplosion" type="MeshInstance3D" parent="Explosion"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00386715, 0.0176812, -0.000396729)
+mesh = SubResource("SphereMesh_o14vk")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_kwdn3")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_xsm56")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jur3c")
+}

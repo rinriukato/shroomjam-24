@@ -32,7 +32,6 @@ extends Resource
 @export var is_auto : bool
 var weapon_manager : WeaponManager
 
-
 # Weapon Logic
 var trigger_down := false :
 	set(v):
