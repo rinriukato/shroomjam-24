@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@export var hp = 100
+@export var hp = 1000
 
 func _process(_delta: float) -> void:
 	$"../Label3D".text = 'HP: ' + str(hp)

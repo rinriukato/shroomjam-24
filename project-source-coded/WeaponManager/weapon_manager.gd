@@ -1,11 +1,16 @@
 class_name WeaponManager
 extends Node3D
 
+enum weapon {
+	RAIL_GUN, ROCKET_LAUNCHER, SHOTGUN, MACHINE_GUN 
+}
+
 # For stopping weapon shooting while menus are open
 @export var allow_shoot : bool = true
 
 # Set weapon
 @export var current_weapon : WeaponResource
+@export var arsenal : Array[WeaponResource]
 
 @export var player : CharacterBody3D
 @export var bullet_raycast : RayCast3D
@@ -48,6 +53,7 @@ func make_bullet_trail():
 	if current_weapon_view_model_muzzle == null:
 		return
 	
+	# My assumption that this has issues with relative position..
 	var bullet_instance = current_weapon.bullet.instantiate()
 	#print('muzzle pos: ' + str(current_weapon_view_model_muzzle.global_position))
 	#print('target pos:' + str(target_pos))
@@ -69,8 +75,23 @@ func queue_anim(anim_name : String):
 	if not anim_player: return
 	anim_player.queue(anim_name)
 	
-# Single fire functionality 
 func _unhandled_input(event: InputEvent) -> void:
+	# Weapon Switching:
+	if event.is_action_pressed("weapon_1") and current_weapon != arsenal[weapon.RAIL_GUN]:
+		current_weapon = arsenal[weapon.RAIL_GUN]
+		update_weapon_model()
+		hud.displayWeapon(weapon.RAIL_GUN)
+	if event.is_action_pressed("weapon_2") and current_weapon != arsenal[weapon.ROCKET_LAUNCHER]:
+		current_weapon = arsenal[weapon.ROCKET_LAUNCHER]
+		update_weapon_model()
+		hud.displayWeapon(weapon.ROCKET_LAUNCHER)
+	if event.is_action_pressed("weapon_3"):
+		pass
+	if event.is_action_pressed("weapon_4"):
+		pass
+	
+	# Single fire functionality 
+	# NOTE: Consider if semi-automatic fire is what you *really* want in a fast shooter?
 	if current_weapon and is_inside_tree():
 		if not current_weapon.is_auto:
 			if event.is_action_pressed('shoot') and allow_shoot and is_ready_to_shoot:
@@ -82,6 +103,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready() -> void:
 	update_weapon_model()
 	is_ready_to_shoot = true
+	#hud.displayWeapon(weapon.RAIL_GUN) # For some reason this makes the HUD think a label doesn't exist yet? Race condition maybe?
 
 func _process(_delta: float) -> void:
 	if hud == null: return

@@ -8,14 +8,13 @@ extends WeaponResource
 
 func fire_shot():
 	weapon_manager.play_sound(shoot_sound)
-	weapon_manager.queue_anim(view_shoot_anim)
-	weapon_manager.queue_anim(view_idle_anim)
+	#weapon_manager.queue_anim(view_shoot_anim)
+	#weapon_manager.queue_anim(view_idle_anim)
 	
 	# Currently none functional.
 	#weapon_manager.make_bullet_trail()
 	
 	var raycast = weapon_manager.bullet_raycast
-	raycast.target_position = projectile_relative_spawn_pos
 	raycast.force_raycast_update()
 	
 	var rel_spawn_pos = projectile_relative_spawn_pos

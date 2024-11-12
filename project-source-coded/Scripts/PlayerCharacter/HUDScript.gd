@@ -13,8 +13,7 @@ class_name HUD
 @onready var speedLinesContainer = $SpeedLinesContrainer
 @onready var dashesLabel = $HBoxContainer/VBoxContainer2/DashesLabel
 @onready var positionLabel = $HBoxContainer/VBoxContainer2/Position
-@onready var xpLabel = $HBoxContainer/VBoxContainer2/XP
-@onready var levelLabel = $HBoxContainer/VBoxContainer2/GunLevel
+@onready var weaponLabel = $HBoxContainer/VBoxContainer2/Weapon
 
 func _ready():
 	speedLinesContainer.visible = false #the speed lines will only be displayed when the character will dashing
@@ -76,12 +75,19 @@ func displayDashes(dashes):
 func displayPosition(pos):
 	positionLabel.set_text((str(pos)))
 
-func displayXP(xp):
-	positionLabel.set_text((str(xp)))
-
-func displayLevel(level):
-	levelLabel.set_text((str(level)))
-
+func displayWeapon(currentWeapon):
+	var weaponName : String
+	
+	if currentWeapon == 0:
+		weaponName = 'Rail Gun'
+	if currentWeapon == 1:
+		weaponName = 'Rocket Launcher'
+	if currentWeapon == 2:
+		weaponName = 'Shotgun'
+	if currentWeapon == 3:
+		weaponName = 'Machine Gun'
+	
+	weaponLabel.set_text(weaponName)
 
 func _process(_delta):
 	#this function manage the frames per second displayment
