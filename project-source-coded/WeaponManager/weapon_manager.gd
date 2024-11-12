@@ -87,8 +87,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		hud.displayWeapon(weapon.ROCKET_LAUNCHER)
 	if event.is_action_pressed("weapon_3"):
 		pass
-	if event.is_action_pressed("weapon_4"):
-		pass
+	if event.is_action_pressed("weapon_4") and current_weapon != arsenal[weapon.MACHINE_GUN]:
+		current_weapon = arsenal[weapon.MACHINE_GUN]
+		update_weapon_model()
+		hud.displayWeapon(weapon.MACHINE_GUN)
 	
 	# Single fire functionality 
 	# NOTE: Consider if semi-automatic fire is what you *really* want in a fast shooter?

@@ -1,13 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=18 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
 [ext_resource type="PackedScene" uid="uid://b7djlp22nku24" path="res://WeaponManager/weapon_manager.tscn" id="3_3saur"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDScript.gd" id="3_l04tv"]
-[ext_resource type="Resource" uid="uid://cw7oaxs3gcy0a" path="res://WeaponManager/LightBeam/rail_gun.tres" id="4_s7fmj"]
+[ext_resource type="Resource" uid="uid://cw7oaxs3gcy0a" path="res://WeaponManager/RailGun/rail_gun.tres" id="4_s7fmj"]
 [ext_resource type="Resource" uid="uid://cr1r4co0mhflt" path="res://WeaponManager/RocketLauncher/rocket_launcher.tres" id="4_xl0p8"]
 [ext_resource type="Script" path="res://WeaponManager/weapon_resource.gd" id="5_g5ero"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDRedimensionmentScript.gd" id="5_jgfg0"]
+[ext_resource type="Resource" uid="uid://cspc2kb8tlokv" path="res://WeaponManager/MachineGun/machine_gun.tres" id="7_uingp"]
 [ext_resource type="Shader" path="res://Arts/Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5yjma"]
@@ -131,7 +132,7 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="WeaponManager" parent="." node_paths=PackedStringArray("player", "bullet_raycast", "bullet_raycast_end", "view_model_container") instance=ExtResource("3_3saur")]
 current_weapon = ExtResource("4_s7fmj")
-arsenal = Array[ExtResource("5_g5ero")]([ExtResource("4_s7fmj"), ExtResource("4_xl0p8")])
+arsenal = Array[ExtResource("5_g5ero")]([ExtResource("4_s7fmj"), ExtResource("4_xl0p8"), null, ExtResource("7_uingp")])
 player = NodePath("..")
 bullet_raycast = NodePath("../CameraHolder/Camera3D/BulletRayCast3D")
 bullet_raycast_end = NodePath("../CameraHolder/Camera3D/BulletRayCastEnd")
