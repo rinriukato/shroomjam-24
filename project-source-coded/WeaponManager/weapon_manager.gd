@@ -16,6 +16,8 @@ enum weapon {
 @export var bullet_raycast : RayCast3D
 @export var bullet_raycast_end : Node3D
 
+@export var shotgun_raycasts : Array[RayCast3D]
+
 # Just view model for now...
 @export var view_model_container : Node3D
 
@@ -49,16 +51,17 @@ func update_weapon_model() -> void:
 		current_weapon_view_model_muzzle = view_model_container.find_child("Muzzle", true, false) if current_weapon_view_model else null
 
 # NOTE: Bullet doesn't spawn at intended location???? Idk why
-func make_bullet_trail():
+func make_bullet_trail(target_pos : Vector3):
 	if current_weapon_view_model_muzzle == null:
 		return
 	
-	# My assumption that this has issues with relative position..
-	var bullet_instance = current_weapon.bullet.instantiate()
-	#print('muzzle pos: ' + str(current_weapon_view_model_muzzle.global_position))
-	#print('target pos:' + str(target_pos))
-	bullet_instance.init(current_weapon_view_model_muzzle.global_position, bullet_raycast.get_collision_point())
-	get_parent().add_child(bullet_instance)
+	var muzzle = current_weapon_view_model_muzzle.global_position
+	#var bullet_dir = (target_pos - muzzle.global_position).normalized()
+	var bullet_tracer = current_weapon.bullet.instantiate()
+	player.add_sibling(bullet_tracer)
+	bullet_tracer.target_pos = target_pos
+	bullet_tracer.global_position = muzzle
+	
 	
 func play_sound(sound : AudioStream):
 	if sound :
@@ -86,7 +89,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		update_weapon_model()
 		hud.displayWeapon(weapon.ROCKET_LAUNCHER)
 	if event.is_action_pressed("weapon_3"):
-		pass
+		current_weapon = arsenal[weapon.SHOTGUN]
+		update_weapon_model()
+		hud.displayWeapon(weapon.SHOTGUN)
 	if event.is_action_pressed("weapon_4") and current_weapon != arsenal[weapon.MACHINE_GUN]:
 		current_weapon = arsenal[weapon.MACHINE_GUN]
 		update_weapon_model()

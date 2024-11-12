@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://cw7oaxs3gcy0a"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=6 format=3 uid="uid://cw7oaxs3gcy0a"]
 
 [ext_resource type="Script" path="res://WeaponManager/weapon_resource.gd" id="1_iiss2"]
+[ext_resource type="PackedScene" uid="uid://c4qfwdvnjg5a5" path="res://Scenes/bullet_trail.tscn" id="1_ufn6l"]
 [ext_resource type="AudioStream" uid="uid://1mserrwmarll" path="res://WeaponManager/sounds/531861__superphat__scifiheavyblastershot.wav" id="2_4ehhb"]
 [ext_resource type="AudioStream" uid="uid://il8rqgg7uaf6" path="res://WeaponManager/sounds/668358__adhdreaming__selection-selected.wav" id="3_uqnsv"]
 [ext_resource type="PackedScene" uid="uid://b2qb14e4sjw2d" path="res://Scenes/pistol.tscn" id="4_vebeg"]
@@ -8,6 +9,7 @@
 [resource]
 script = ExtResource("1_iiss2")
 view_model = ExtResource("4_vebeg")
+bullet = ExtResource("1_ufn6l")
 view_model_pos = Vector3(0.253, -0.215, -0.214)
 view_model_rot = Vector3(0, 3.14159, 0)
 view_model_scale = Vector3(0.14, 0.14, 0.14)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=19 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://WeaponManager/weapon_resource.gd" id="5_g5ero"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDRedimensionmentScript.gd" id="5_jgfg0"]
 [ext_resource type="Resource" uid="uid://cspc2kb8tlokv" path="res://WeaponManager/MachineGun/machine_gun.tres" id="7_uingp"]
+[ext_resource type="Resource" uid="uid://b28jlbwkj4trq" path="res://WeaponManager/Shotgun/shotgun.tres" id="7_yhpt4"]
 [ext_resource type="Shader" path="res://Arts/Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5yjma"]
@@ -122,6 +123,48 @@ target_position = Vector3(0, 0, -100)
 [node name="BulletRayCastEnd" type="Node3D" parent="CameraHolder/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.047, 0.02, -101)
 
+[node name="ShotgunRayCasts" type="Node3D" parent="CameraHolder/Camera3D"]
+
+[node name="BulletRayCast3D" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
+[node name="BulletRayCast3D2" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
+[node name="BulletRayCast3D3" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
+[node name="BulletRayCast3D4" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
+[node name="BulletRayCast3D5" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
+[node name="BulletRayCast3D6" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
+[node name="BulletRayCast3D7" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
+[node name="BulletRayCast3D8" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
+[node name="BulletRayCast3D9" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
+[node name="BulletRayCast3D10" type="RayCast3D" parent="CameraHolder/Camera3D/ShotgunRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -30)
+
 [node name="CeilingCheck" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.758088, 0)
 visible = false
@@ -130,12 +173,13 @@ target_position = Vector3(0, 4, 0)
 collide_with_areas = true
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="WeaponManager" parent="." node_paths=PackedStringArray("player", "bullet_raycast", "bullet_raycast_end", "view_model_container") instance=ExtResource("3_3saur")]
+[node name="WeaponManager" parent="." node_paths=PackedStringArray("player", "bullet_raycast", "bullet_raycast_end", "shotgun_raycasts", "view_model_container") instance=ExtResource("3_3saur")]
 current_weapon = ExtResource("4_s7fmj")
-arsenal = Array[ExtResource("5_g5ero")]([ExtResource("4_s7fmj"), ExtResource("4_xl0p8"), null, ExtResource("7_uingp")])
+arsenal = Array[ExtResource("5_g5ero")]([ExtResource("4_s7fmj"), ExtResource("4_xl0p8"), ExtResource("7_yhpt4"), ExtResource("7_uingp")])
 player = NodePath("..")
 bullet_raycast = NodePath("../CameraHolder/Camera3D/BulletRayCast3D")
 bullet_raycast_end = NodePath("../CameraHolder/Camera3D/BulletRayCastEnd")
+shotgun_raycasts = [NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D"), NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D2"), NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D3"), NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D4"), NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D5"), NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D6"), NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D7"), NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D8"), NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D9"), NodePath("../CameraHolder/Camera3D/ShotgunRayCasts/BulletRayCast3D10")]
 view_model_container = NodePath("../CameraHolder/Camera3D/ViewModel")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

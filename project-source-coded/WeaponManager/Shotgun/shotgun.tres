@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SpreadWeaponResource" load_steps=4 format=3 uid="uid://b28jlbwkj4trq"]
+
+[ext_resource type="Script" path="res://WeaponManager/spread_weapon_resource.gd" id="1_pb6du"]
+[ext_resource type="AudioStream" uid="uid://1mserrwmarll" path="res://WeaponManager/sounds/531861__superphat__scifiheavyblastershot.wav" id="2_fwgws"]
+[ext_resource type="PackedScene" uid="uid://b2qb14e4sjw2d" path="res://Scenes/pistol.tscn" id="3_5sqtx"]
+
+[resource]
+script = ExtResource("1_pb6du")
+shot_spread = 10.0
+view_model = ExtResource("3_5sqtx")
+view_model_pos = Vector3(0.253, -0.215, -0.214)
+view_model_rot = Vector3(0, 3.14159, 0)
+view_model_scale = Vector3(0.14, 0.14, 0.14)
+view_idle_anim = ""
+view_equip_anim = ""
+view_shoot_anim = ""
+view_reload_anim = ""
+shoot_sound = ExtResource("2_fwgws")
+damage = 5.0
+fire_rate = 1.0
+is_purify = false
+is_corrupt = true
+is_auto = false

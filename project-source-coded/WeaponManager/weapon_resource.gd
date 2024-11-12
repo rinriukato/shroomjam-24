@@ -71,10 +71,9 @@ func fire_shot():
 	#weapon_manager.queue_anim(view_shoot_anim)
 	#weapon_manager.queue_anim(view_idle_anim)
 	
-	# Currently none functional.
-	#weapon_manager.make_bullet_trail()
 	
 	var raycast = weapon_manager.bullet_raycast
+	var bullet_target : Vector3 = weapon_manager.bullet_raycast_end.global_position
 	raycast.force_raycast_update()
 	
 	# Furtherest point bullet can travel based on raycast
@@ -82,6 +81,7 @@ func fire_shot():
 		var object = raycast.get_collider()
 		var normal = raycast.get_collision_normal()
 		var point = raycast.get_collision_point()
+		bullet_target = point
 		
 		# Apply force to physics objects, not necessary rn
 		if object is RigidBody3D:
@@ -100,3 +100,5 @@ func fire_shot():
 				pass
 			
 			object.take_damage(self.damage)
+	
+	weapon_manager.make_bullet_trail(bullet_target)
