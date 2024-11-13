@@ -8,8 +8,6 @@ func fire_shot():
 	#weapon_manager.queue_anim(view_shoot_anim)
 	#weapon_manager.queue_anim(view_idle_anim)
 	
-	# Currently none functional.
-	#weapon_manager.make_bullet_trail()
 	
 	var raycasts = weapon_manager.shotgun_raycasts
 	
@@ -17,9 +15,8 @@ func fire_shot():
 	for r in raycasts:
 		r.target_position.x = randf_range(shot_spread,-shot_spread)
 		r.target_position.y = randf_range(shot_spread,-shot_spread)
-	
+		r.force_raycast_update()
 	#NOTE: This is potentially computationally heavy. So please use force raycast and disable raycasts.
-	#raycasts.force_raycast_update()
 	
 	# Furtherest point bullet can travel based on raycast
 	for r in raycasts:

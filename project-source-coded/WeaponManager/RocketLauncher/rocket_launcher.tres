@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://WeaponManager/projectile_weapon_resource.gd" id="1_516co"]
 [ext_resource type="PackedScene" uid="uid://bcpotul7h4ant" path="res://WeaponManager/RocketLauncher/rocket.tscn" id="1_llmxf"]
-[ext_resource type="PackedScene" uid="uid://cpk3xq10fjvo7" path="res://Arts/models/pistol.gltf" id="3_unajm"]
+[ext_resource type="PackedScene" uid="uid://bs7w0rbqem1bh" path="res://Scenes/arm_cannon.tscn" id="3_xx7ef"]
 
 [resource]
 script = ExtResource("1_516co")
@@ -10,10 +10,10 @@ projectile = ExtResource("1_llmxf")
 projectile_relative_velocity = Vector3(0, 0, -15)
 projectile_relative_spawn_pos = Vector3(0, 0, -3)
 projectile_relative_spawn_rotation = Vector3(0, 0, 0)
-view_model = ExtResource("3_unajm")
-view_model_pos = Vector3(0.253, -0.215, -0.214)
+view_model = ExtResource("3_xx7ef")
+view_model_pos = Vector3(0.135, -0.42, -0.27)
 view_model_rot = Vector3(0, 3.14159, 0)
-view_model_scale = Vector3(0.14, 0.14, 0.14)
+view_model_scale = Vector3(1, 1, 1)
 view_idle_anim = ""
 view_equip_anim = ""
 view_shoot_anim = ""

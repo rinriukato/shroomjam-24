@@ -28,8 +28,8 @@ func _ready():
 	var mat = StandardMaterial3D.new()
 	mat.set_albedo(color)
 	mat.emission_enabled = true
-	%Body.set_surface_override_material(0,mat)
-	%Nose.set_surface_override_material(0,mat)
+	#%Body.set_surface_override_material(0,mat)
+	#%Nose.set_surface_override_material(0,mat)
 	material = mat
 	
 func take_damage(dmg):
