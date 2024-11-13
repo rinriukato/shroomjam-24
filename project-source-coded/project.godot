@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Project Source-coded"
-run/main_scene="res://Scenes/world_test.tscn"
+config/name="Project Source Coded"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://Arts/icon.svg"
 

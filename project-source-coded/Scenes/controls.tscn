@@ -1,0 +1,165 @@
+[gd_scene load_steps=2 format=3 uid="uid://c08ym83itj3sk"]
+
+[sub_resource type="GDScript" id="GDScript_ajjlx"]
+script/source = "extends Control
+
+
+
+func _on_button_button_down() -> void:
+	get_tree().change_scene_to_file(\"res://Scenes/main_menu.tscn\")
+"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_ajjlx")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.0
+offset_top = -123.5
+offset_right = 229.0
+offset_bottom = 123.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 65
+
+[node name="Main" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 93
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Main"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Main/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "FORWARD : "
+
+[node name="Label2" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "BACK:"
+
+[node name="Label3" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "LEFT:
+"
+
+[node name="Label4" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "RIGHT:
+"
+
+[node name="Label5" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "SHOOT:"
+
+[node name="Label8" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "TOGGLE RUN: "
+
+[node name="Label6" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "CROUCH | SLIDE: "
+
+[node name="Label7" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "DASH:"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Main/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "W"
+
+[node name="Label3" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "S"
+
+[node name="Label4" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "A"
+
+[node name="Label5" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "D"
+
+[node name="Label6" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "LMB"
+
+[node name="Label9" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "SHIFT"
+
+[node name="Label7" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "C"
+
+[node name="Label8" type="Label" parent="HBoxContainer/Main/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "CTRL"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Main"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Main/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Main/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "RAIL GUN : "
+
+[node name="Label2" type="Label" parent="HBoxContainer/Main/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "ROCKET LAUNCHER:"
+
+[node name="Label3" type="Label" parent="HBoxContainer/Main/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "SHOTGUN:
+"
+
+[node name="Label4" type="Label" parent="HBoxContainer/Main/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "MACHINE GUN:
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Main/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/Main/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "1"
+
+[node name="Label3" type="Label" parent="HBoxContainer/Main/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "2"
+
+[node name="Label4" type="Label" parent="HBoxContainer/Main/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "3"
+
+[node name="Label5" type="Label" parent="HBoxContainer/Main/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "4"
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "RETURN TO START"
+
+[connection signal="button_down" from="HBoxContainer/Button" to="." method="_on_button_button_down"]
