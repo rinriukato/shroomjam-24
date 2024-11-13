@@ -60,7 +60,7 @@ func on_trigger_up():
 
 func on_equip():
 	# Play animations for equipping here, example below
-	#weapon_manager.queue_anim(view_idle_anim)
+	weapon_manager.queue_anim(view_idle_anim)
 	pass
 
 func on_unequip():
@@ -68,8 +68,8 @@ func on_unequip():
 
 func fire_shot():
 	weapon_manager.play_sound(shoot_sound)
-	#weapon_manager.queue_anim(view_shoot_anim)
-	#weapon_manager.queue_anim(view_idle_anim)
+	weapon_manager.queue_anim(view_shoot_anim)
+	weapon_manager.queue_anim(view_idle_anim)
 	
 	
 	var raycast = weapon_manager.bullet_raycast

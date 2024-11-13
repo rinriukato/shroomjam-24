@@ -76,9 +76,10 @@ func stop_sounds():
 	audio_stream_player.stop()
 	
 func queue_anim(anim_name : String):
-	var anim_player : AnimationPlayer = current_weapon_view_model.get_node_or_null("AnimationPlayer2")
+	var anim_player : AnimationPlayer = current_weapon_view_model.get_node_or_null("AnimationPlayer")
 	# The model itself MUST have the animation player node
 	if not anim_player: return
+	
 	anim_player.queue(anim_name)
 	
 func _unhandled_input(event: InputEvent) -> void:
