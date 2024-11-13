@@ -37,6 +37,7 @@ func update_weapon_model() -> void:
 		# If container is set properly (to player) and there is a model avaliable...
 		if view_model_container and current_weapon.view_model:
 			# Spawn model, and add to container
+			current_weapon_view_model = null
 			current_weapon_view_model = current_weapon.view_model.instantiate()
 			view_model_container.add_child(current_weapon_view_model)
 			
@@ -54,13 +55,15 @@ func update_weapon_model() -> void:
 func make_bullet_trail(target_pos : Vector3):
 	if current_weapon_view_model_muzzle == null:
 		return
-	
-	var muzzle = current_weapon_view_model_muzzle.global_position
-	#var bullet_dir = (target_pos - muzzle.global_position).normalized()
-	var bullet_tracer = current_weapon.bullet.instantiate()
-	player.add_sibling(bullet_tracer)
-	bullet_tracer.target_pos = target_pos
-	bullet_tracer.global_position = muzzle
+	var muzzle = current_weapon_view_model_muzzle
+	var bullet_dir = (target_pos - muzzle.global_position).normalized()
+	var start_pos = muzzle.global_position + bullet_dir*0.25
+	if (target_pos - start_pos).length() > 3.0:
+		var bullet_tracer = preload("res://Scenes/bullet_trail.tscn").instantiate()
+		player.add_sibling(bullet_tracer)
+		bullet_tracer.global_position = start_pos
+		bullet_tracer.target_pos = target_pos
+		bullet_tracer.look_at(target_pos)
 	
 	
 func play_sound(sound : AudioStream):

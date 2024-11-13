@@ -2,8 +2,9 @@
 
 [sub_resource type="Curve" id="Curve_7ufs5"]
 bake_resolution = 16
-_data = [Vector2(0.00506329, 0.104753), 0.0, 0.0, 0, 0, Vector2(0.997468, 0.0101843), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.0414906), 0.0, 0.0, 0, 0, Vector2(0.998534, 0.044926), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [resource]
+width = 32
 curve = SubResource("Curve_7ufs5")

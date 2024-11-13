@@ -19,6 +19,10 @@ config/icon="res://Arts/icon.svg"
 
 enabled=PackedStringArray("res://addons/GPUTrail-main/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 left={

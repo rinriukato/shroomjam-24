@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cq3loigjiyen5"
-path="res://.godot/imported/blaster.gltf-7036f90d807dba5e8a98a75a5a09450b.scn"
+uid="uid://3wsmbpasuhg1"
+path="res://.godot/imported/Arena.glb-63fce951cba4b962da96972c4cbfe5c2.scn"
 
 [deps]
 
-source_file="res://Arts/models/blaster.gltf"
-dest_files=["res://.godot/imported/blaster.gltf-7036f90d807dba5e8a98a75a5a09450b.scn"]
+source_file="res://Arts/models/final/Arena.glb"
+dest_files=["res://.godot/imported/Arena.glb-63fce951cba4b962da96972c4cbfe5c2.scn"]
 
 [params]
 

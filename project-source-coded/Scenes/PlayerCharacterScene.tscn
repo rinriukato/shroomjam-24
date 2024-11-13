@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=20 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
 [ext_resource type="PackedScene" uid="uid://b7djlp22nku24" path="res://WeaponManager/weapon_manager.tscn" id="3_3saur"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDScript.gd" id="3_l04tv"]
+[ext_resource type="PackedScene" uid="uid://bs7w0rbqem1bh" path="res://Scenes/arm_cannon.tscn" id="3_ussgi"]
 [ext_resource type="Resource" uid="uid://cw7oaxs3gcy0a" path="res://WeaponManager/RailGun/rail_gun.tres" id="4_s7fmj"]
 [ext_resource type="Resource" uid="uid://cr1r4co0mhflt" path="res://WeaponManager/RocketLauncher/rocket_launcher.tres" id="4_xl0p8"]
 [ext_resource type="Script" path="res://WeaponManager/weapon_resource.gd" id="5_g5ero"]
@@ -41,6 +42,7 @@ shader_parameter/noise = SubResource("NoiseTexture2D_78nux")
 
 [node name="PlayerCharacter" type="CharacterBody3D" groups=["PlayerCharacter"]]
 collision_layer = 2
+collision_mask = 5
 floor_block_on_wall = false
 floor_max_angle = 1.309
 floor_snap_length = 0.0
@@ -115,6 +117,10 @@ far = 1000.0
 
 [node name="ViewModel" type="Node3D" parent="CameraHolder/Camera3D"]
 unique_name_in_owner = true
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="ArmCannon" parent="CameraHolder/Camera3D/ViewModel" instance=ExtResource("3_ussgi")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.135, -0.42, -0.27)
 
 [node name="BulletRayCast3D" type="RayCast3D" parent="CameraHolder/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -302,7 +308,6 @@ theme_override_font_sizes/font_size = 40
 text = "Dashes avaliable : "
 
 [node name="Position" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
-visible = false
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
@@ -364,7 +369,6 @@ theme_override_font_sizes/font_size = 40
 text = "..................."
 
 [node name="Position" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
-visible = false
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40

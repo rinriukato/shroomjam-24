@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dekajmop4fanw"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_lc4c0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pt80m"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_w243g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ktx62"]
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_lc4c0")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+mesh = SubResource("CapsuleMesh_pt80m")
+
+[node name="Nose" type="MeshInstance3D" parent="Body"]
+unique_name_in_owner = true
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, 0.25, 0, -0.25, -1.09278e-08, 0, 0.35, -0.5)
+mesh = SubResource("PrismMesh_w243g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ktx62")
+
+[node name="Gun" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07, -0.75)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -10, 0)
+collision_mask = 3
+
+[node name="Engaged" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true

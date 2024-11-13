@@ -86,7 +86,7 @@ var velocityPreDash : Vector3
 @export var wallGravityMultiplier : float
 
 # HP
-@export var hp : float = 100
+@export var health : float = 100
 
 #references variables
 @onready var cameraHolder = $CameraHolder
@@ -138,7 +138,8 @@ func _physics_process(delta):
 	
 	move(delta)
 	
-	collisionHandling()
+	#NOTE: This kinda breaks with wall riding. So i'm going to disable for now
+	#collisionHandling()
 	
 	move_and_slide()
 
@@ -551,10 +552,14 @@ func wallrunStateChanges():
 			mesh.position.y = 0.0
 			
 func collisionHandling():
+	
 	#this function handle the collisions, but in this case, only the collision with a wall, to detect if the character can wallrun
 	if is_on_wall():
 		var lastCollision = get_slide_collision(0)
 		
+		if lastCollision is Bullet: return
+		
+		print(lastCollision)
 		if lastCollision:
 			var collidedBody = lastCollision.get_collider()
 			var layer = collidedBody.collision_layer
@@ -564,7 +569,8 @@ func collisionHandling():
 			else: canWallRun = false 
 
 func take_damage(damage : float):
-	hp -= damage
+	health -= damage
+	print(health)
 
 func _on_dash_timer_timeout() -> void:
 	dashCharges += 1

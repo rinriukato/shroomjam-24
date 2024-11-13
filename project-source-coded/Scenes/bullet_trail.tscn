@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4qfwdvnjg5a5"]
+[gd_scene load_steps=9 format=3 uid="uid://c4qfwdvnjg5a5"]
 
 [ext_resource type="Shader" path="res://addons/GPUTrail-main/shaders/trail.gdshader" id="1_cwmbd"]
-[ext_resource type="Shader" path="res://addons/GPUTrail-main/shaders/trail_draw_pass.gdshader" id="2_mu60h"]
+[ext_resource type="Material" uid="uid://b2w8eyxu60h8j" path="res://Scenes/bullet_trail.tres" id="2_s0q10"]
 [ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://addons/GPUTrail-main/defaults/texture.tres" id="3_5kox1"]
 [ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://addons/GPUTrail-main/defaults/curve.tres" id="4_71frg"]
 [ext_resource type="Script" path="res://addons/GPUTrail-main/GPUTrail3D.gd" id="5_n3v4m"]
@@ -10,7 +10,7 @@
 script/source = "extends Node3D
 
 @export var target_pos = Vector3(0,0,0)
-@export var speed = 100.0
+@export var speed = 120.0
 @export var tracer_length = 1
 @export var bullet_lifetime = 1.0
 
@@ -25,32 +25,23 @@ func _process(delta: float) -> void:
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c36rx"]
 shader = ExtResource("1_cwmbd")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d30kg"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("2_mu60h")
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-shader_parameter/flags = 40
-shader_parameter/color_ramp = ExtResource("3_5kox1")
-shader_parameter/curve = ExtResource("4_71frg")
-
 [sub_resource type="QuadMesh" id="QuadMesh_4o15j"]
-material = SubResource("ShaderMaterial_d30kg")
+material = ExtResource("2_s0q10")
 
 [node name="bullet_trail" type="Node3D"]
 script = SubResource("GDScript_hpigw")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.458857, 0.471392, -0.853892)
-amount = 10
-lifetime = 2.0
+amount = 79
+lifetime = 79.0
+speed_scale = 3.8
 explosiveness = 1.0
+fixed_fps = 60
 process_material = SubResource("ShaderMaterial_c36rx")
 draw_pass_1 = SubResource("QuadMesh_4o15j")
 script = ExtResource("5_n3v4m")
-length = 10
-length_seconds = 0.333333
+length = 79
+length_seconds = 1.31667
 color_ramp = ExtResource("3_5kox1")
 curve = ExtResource("4_71frg")
 _defaults_have_been_set = true
