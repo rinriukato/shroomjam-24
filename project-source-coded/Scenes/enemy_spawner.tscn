@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ijj52e6tvfr7"]
+
+[ext_resource type="Script" path="res://enemy_spawner.gd" id="1_sibby"]
+[ext_resource type="PackedScene" uid="uid://dekajmop4fanw" path="res://Scenes/enemy.tscn" id="2_v4tud"]
+[ext_resource type="PackedScene" uid="uid://gwgmaiye1agl" path="res://Scenes/enemy_chaser_air.tscn" id="3_qvuoc"]
+[ext_resource type="PackedScene" uid="uid://dq4e0ephoelmv" path="res://Scenes/turret.tscn" id="4_htecl"]
+
+[node name="EnemySpawner" type="Node3D" node_paths=PackedStringArray("spawn_locations")]
+script = ExtResource("1_sibby")
+spawn_locations = [NodePath("Spawner1"), NodePath("Spawner2"), NodePath("Spawner3"), NodePath("Spawner4")]
+enemys = Array[PackedScene]([ExtResource("2_v4tud"), ExtResource("3_qvuoc"), ExtResource("4_htecl")])
+enemies_to_spawn = 10
+
+[node name="Spawner1" type="Node3D" parent="."]
+
+[node name="Spawner2" type="Node3D" parent="."]
+
+[node name="Spawner3" type="Node3D" parent="."]
+
+[node name="Spawner4" type="Node3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

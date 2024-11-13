@@ -2,9 +2,9 @@ extends CharacterBody3D
 
 @export var player_path : NodePath
 @export var color : Color
-@export var aggro_range := 50.0
-@export var fire_speed := 0.6
-@export var damage := 10
+@export var aggro_range := 150.0
+@export var fire_speed := 0.3
+@export var damage := 20
 
 var health = 100
 var material
@@ -14,10 +14,9 @@ var bullet = preload("res://Scenes/enemy_bullet.tscn")
 @onready var gun = $Gun
 @onready var nav = $NavigationAgent3D
 @onready var sight = $RayCast3D
-@onready var engagedTimer = $Engaged
 
 var lastShot := 0.0
-var speed := 4.0
+var speed := 0.0
 
 var startPos
 var engaged = false
@@ -35,7 +34,6 @@ func _ready():
 func take_damage(dmg):
 	health -= dmg
 	engaged = true
-	engagedTimer.start()
 	if health < 1:
 		SignalBus.enemy_died.emit()
 		queue_free()

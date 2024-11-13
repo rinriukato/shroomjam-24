@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/world_test.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://Arts/icon.svg"
 
+[autoload]
+
+SignalBus="*res://Scenes/signal_bus.tscn"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GPUTrail-main/plugin.cfg")

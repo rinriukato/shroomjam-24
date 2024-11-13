@@ -77,6 +77,7 @@ height = 3.65163
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_lc4c0")
+fire_speed = 1.0
 
 [node name="Chaser Ground" parent="." instance=ExtResource("2_na1si")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, -0.859702, 0)
@@ -108,5 +109,6 @@ wait_time = 3.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
+radius = 3.55
 
 [editable path="Chaser Ground"]

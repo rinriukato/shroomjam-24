@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq4e0ephoelmv"]
+
+[ext_resource type="Script" path="res://Scripts/turret.gd" id="1_bu86i"]
+[ext_resource type="PackedScene" uid="uid://b0ff7f8emknt2" path="res://Arts/models/final/Turret Stationary.glb" id="2_lp6d1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qjo6v"]
+size = Vector3(2.37738, 1, 1.53943)
+
+[node name="Turret" type="CharacterBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_bu86i")
+
+[node name="Turret Stationary" parent="." instance=ExtResource("2_lp6d1")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0816956, 0.528049, -0.0491333)
+shape = SubResource("BoxShape3D_qjo6v")
+
+[node name="Gun" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.687131, 0.773901)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.354632, -0.056038)
+target_position = Vector3(0, -100, 0)
+collision_mask = 3
+
+[node name="Engaged" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+max_speed = 0.01
